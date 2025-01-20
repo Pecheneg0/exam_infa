@@ -43,19 +43,21 @@ int main() {
 	} 
 
 	fprintf(stdout, "Ответ на задачу : \n");
-	
+	char alpha_arr []  = {'a', 'e', 'u','i','o'};
+	int K = 0; // Счётчик слов, нач-ся на гласную букву.
 	for (int i = 0; i < len_t; ++i) {
-		long int num = strtol (tokens[i], NULL, 10);
-		if (num == 0 && tokens[i][0] != 0 ) {
-			fprintf (stderr, "Ошибка преобразования строки %s в число !\n", tokens[i]);
-		} 
-		else if (num > 5){
-			fprintf (stdout, "Num : %ld\n", num);
+		for (int h = 0; h < 5; ++h) {
+			if (tolower(tokens[i][0]) == alpha_arr[h] ) {
+				K++;
+				fprintf (stdout , "Слово № %d : %s\n", i+1, tokens[i]);
+			}
 		}
 	}
+	if (K == 0) {
+		fprintf (stdout, "Таких слов нет\n");
+	}
 	
-	free(line) ;
-	free (tokens) ;
+	free (tokens);
+	free (line);
 	return 0;
-
 }
