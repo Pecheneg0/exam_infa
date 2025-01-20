@@ -15,9 +15,9 @@ int main() {
 		exit(1);
 	}
 	if (read != 0 && line[read - 1 ] == '\n') {
-		line [read -1] = '\n';
+		line [read -1] = '\0';
 	}
-	fprintf(stdout, "Иссходная строка : %s ", line);
+	fprintf(stdout, "Исходная строка : %s \n", line);
 	
 	
 	// Разделение строки по токенам 
@@ -44,30 +44,20 @@ int main() {
 
 	fprintf(stdout, "Ответ на задачу : \n");
 	
-	// Определение максималбного и минимао=льного токена .
-	
-	char* MIN = tokens [0]; 
-	char* MAX = tokens [0];
-	int i_max = 0;
-	int i_min = 0;
-
-	for (int i = 1; i < len_t; ++i) {
-		if (strcmp(tokens[i], MAX) > 0) {
-			MAX = tokens[i];
-			i_max = i;
-		}
-		if (strcmp (tokens[i], MIN) < 0) {
-			MIN = tokens [i]; 
-			i_min = i;
+	for (int i = 0; i < len_t; ++i) {
+		long int num = strtol (tokens[i], NULL, 10);
+		if (num == 0 && tokens[i] != 0 ) {
+			fprintf (stderr, "Ошибка преобразования строки %s в число !\n", tokens[i]);
+		} 
+		else {
+			fprintf (stdout, "Num : %ld\n", num);
 		}
 	}
+
 	
-	fprintf (stdout, "Максимальный токен : %s\t, индекс : %d\n", MAX, i_max);
-	
-	fprintf (stdout, "Минимальный токен : %s\t, индекс : %d\n", MIN, i_min);
-	
-	free(line);
-	free(tokens);
-	free (token);
-	
+	free(line) ;
+	free (tokens) ;
+
+	return 0;
+
 }

@@ -47,7 +47,8 @@ for  (int i = 0; i<size_tok; ++i) {
         fprintf(stdout ,"%d  ", atoi(&line[i]));
         k++;
 
-    }
+   
+ 
 }
 
 if(k ==0) {
