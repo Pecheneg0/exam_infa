@@ -1,8 +1,9 @@
-#include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <stdio.h>
+#include <errno.h>
 
 int main () {
 
@@ -10,8 +11,8 @@ fprintf(stdout, "Введите строку : ") ;
 char* line = NULL;
 size_t size_l = 0;
 ssize_t read = getline(&line, &size_l, stdin);
-if (line == NULL) {
-    fprintf(stdout, "Ошибка чтения строки ");
+if (read == -1 ) {
+    fprintf(stderr, "Ошибка чтения строки ");
     free(line);
     exit (1);
 }
@@ -28,7 +29,7 @@ size_t len_t = 0; // количество токенов в масстве token
 while (tok != 0) {
     tokens = realloc(tokens, (len_t + 1) * sizeof(char*));
     if (tokens == NULL) {
-        fprintf(stdout, "Ошибка увеличения массива !");
+        fprintf(stderr, "Ошибка увеличения массива !");
         free (line);
         free(tokens);
         exit(1);
@@ -48,7 +49,7 @@ fprintf(stdout, "\nОтвет на задачу : \n");
 for (int i = 0 ; i< len_t; ++i) {
     int num = atoi(tokens[i]);
     if (num == 0) {
-        fprintf(stdout, "\nОшибка преобразования строки в целочисленый тип данных !");
+        fprintf(stderr, "\nОшибка преобразования строки в целочисленый тип данных !");
         free(tokens);
         free(line);
         exit(2);
@@ -58,8 +59,6 @@ for (int i = 0 ; i< len_t; ++i) {
         fprintf(stdout , "Число № %d : %d\n", i+1, num);
     }
 } 
-
-
 
 free(line);
 free(tokens);
